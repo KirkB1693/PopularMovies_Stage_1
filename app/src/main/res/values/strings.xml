@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Popular Movies</string>
+    <string name="movie_poster_content_description">Movie Poster</string>
+    <string name="detail_original_movie_title">Original Movie Title:</string>
+    <string name="detail_plot_synopsis">Plot Synopsis:</string>
+    <string name="detail_user_rating">User Rating:</string>
+    <string name="detail_release_date">Release Date:</string>
+    <string name="action_most_popular">Most Popular</string>
+    <string name="action_highest_rated">Highest Rated</string>
+    <string name="no_internet">No internet connection</string>
+</resources>
