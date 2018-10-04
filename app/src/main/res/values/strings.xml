@@ -8,4 +8,5 @@
     <string name="action_most_popular">Most Popular</string>
     <string name="action_highest_rated">Highest Rated</string>
     <string name="no_internet">No internet connection</string>
+    <string name="close_on_error">Something went wrong…</string>
 </resources>
