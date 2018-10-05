@@ -11,10 +11,17 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
+        debug {
+            // TODO - replace TMDB_API_KEY with a valid API_KEY from The Movie Database in order to have code work
+            buildConfigField 'String', "API_KEY", TMDB_API_KEY
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            // TODO - replace TMDB_API_KEY with a valid API_KEY from The Movie Database in order to have code work
+            buildConfigField 'String', "API_KEY", TMDB_API_KEY
         }
+
     }
 }
 

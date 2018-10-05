@@ -60,48 +60,48 @@ final class QueryUtils {
                     JSONObject movieObject = resultsArray.getJSONObject(i);
 
 
-                        // Set a default title in case there isn't a link in the JSON response
-                        String title = "";
-                        try {
-                            title = movieObject.getString("title");
-                        } catch (Exception e) {
-                            Log.e("QueryUtils", "Problem getting title in the movie JSON results", e);
-                        }
+                    // Set a default title in case there isn't a link in the JSON response
+                    String title = "";
+                    try {
+                        title = movieObject.getString("title");
+                    } catch (Exception e) {
+                        Log.e("QueryUtils", "Problem getting title in the movie JSON results", e);
+                    }
 
-                        // Set a default original title in case there isn't a link in the JSON response
-                        String original_title = "";
-                        try {
-                            original_title = movieObject.getString("original_title");
-                        } catch (Exception e) {
-                            Log.e("QueryUtils", "Problem getting section in the movie JSON results", e);
-                        }
+                    // Set a default original title in case there isn't a link in the JSON response
+                    String original_title = "";
+                    try {
+                        original_title = movieObject.getString("original_title");
+                    } catch (Exception e) {
+                        Log.e("QueryUtils", "Problem getting section in the movie JSON results", e);
+                    }
 
 
-                        // Set a default plot synopsis in case there isn't a link in the JSON response
-                        String overview = "";
-                        try {
-                            // Strip Html formatting codes from the body text, remove nextline and [obj] characters
-                            overview = movieObject.getString("overview");
-                        } catch (Exception e) {
-                            Log.e("QueryUtils", "Problem getting plot synopsis in the movie JSON results", e);
-                        }
+                    // Set a default plot synopsis in case there isn't a link in the JSON response
+                    String overview = "";
+                    try {
+                        // Strip Html formatting codes from the body text, remove nextline and [obj] characters
+                        overview = movieObject.getString("overview");
+                    } catch (Exception e) {
+                        Log.e("QueryUtils", "Problem getting plot synopsis in the movie JSON results", e);
+                    }
 
-                        // Set a default poster path in case there isn't a link in the JSON response
-                        String poster_path = "";
-                        try {
-                            poster_path = movieObject.getString("poster_path");
+                    // Set a default poster path in case there isn't a link in the JSON response
+                    String poster_path = "";
+                    try {
+                        poster_path = movieObject.getString("poster_path");
 
-                        } catch (Exception e) {
-                            Log.e("QueryUtils", "Problem getting poster path in the movie JSON results", e);
-                        }
+                    } catch (Exception e) {
+                        Log.e("QueryUtils", "Problem getting poster path in the movie JSON results", e);
+                    }
 
-                        // Set a default release date in case there isn't a link in the JSON response
-                        String releaseDate = "";
-                        try {
-                            releaseDate = movieObject.getString("release_date");
-                        } catch (Exception e) {
-                            Log.e("QueryUtils", "Problem getting release date in the movie JSON results", e);
-                        }
+                    // Set a default release date in case there isn't a link in the JSON response
+                    String releaseDate = "";
+                    try {
+                        releaseDate = movieObject.getString("release_date");
+                    } catch (Exception e) {
+                        Log.e("QueryUtils", "Problem getting release date in the movie JSON results", e);
+                    }
 
                     // Set a default user rating in case there isn't a link in the JSON response
                     String userRating = "";
@@ -119,7 +119,15 @@ final class QueryUtils {
                         Log.e("QueryUtils", "Problem getting movie id in the movie JSON results", e);
                     }
 
-                        movies.add(new Movies(title, original_title, poster_path, overview, userRating, releaseDate, id));
+                    // Set a default movie backdrop_path in case there isn't a link in the JSON response
+                    String backdrop_path = "";
+                    try {
+                        backdrop_path = movieObject.getString("backdrop_path");
+                    } catch (Exception e) {
+                        Log.e("QueryUtils", "Problem getting backdrop_path in the movie JSON results", e);
+                    }
+
+                    movies.add(new Movies(title, original_title, poster_path, overview, userRating, releaseDate, id, backdrop_path));
 
                 }
             }

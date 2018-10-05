@@ -12,19 +12,21 @@ import com.squareup.picasso.Picasso;
 
 public class DetailActivity extends AppCompatActivity {
 
-    public static final String TITLE = "title";
-    public static final String ORIGINAL_TITLE = "original_title";
-    public static final String POSTER_PATH = "poster_path";
-    public static final String OVERVIEW = "overview";
-    public static final String USER_RATING = "user_rating";
-    public static final String RELEASE_DATE = "release_date";
+    public static final String CURRENT_MOVIE = "current_movie";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
 
+        setupUI();
+    }
+
+
+    private void setupUI() {
         ImageView moviePosterIv = findViewById(R.id.iv_movie_poster_detail);
+        ImageView movieBackdropIv = findViewById(R.id.iv_movie_background_detail);
         TextView mOriginalTitleTv = findViewById(R.id.tv_original_title);
         TextView mPlotSynopsisTv = findViewById(R.id.tv_plot_synopsis);
         TextView mUserRatingTv = findViewById(R.id.tv_user_rating);
@@ -34,29 +36,25 @@ public class DetailActivity extends AppCompatActivity {
         Intent intent = getIntent();
         if (intent == null) {
             closeOnError();
-        }
-
-        assert intent != null;
-        String title = intent.getStringExtra(TITLE);
-        String originalTitle = intent.getStringExtra(ORIGINAL_TITLE);
-        String posterPath = intent.getStringExtra(POSTER_PATH);
-        String overview = intent.getStringExtra(OVERVIEW);
-        String userRating = intent.getStringExtra(USER_RATING);
-        String releaseDate = intent.getStringExtra(RELEASE_DATE);
-
-
-        mOriginalTitleTv.setText(originalTitle);
-        mPlotSynopsisTv.setText(overview);
-        mUserRatingTv.setText(userRating);
-        mReleaseDateTv.setText(releaseDate);
-
-        String fullPosterPath = MovieUrlConstants.BASE_POSTER_URL + MovieUrlConstants.DEFAULT_POSTER_SIZE + posterPath;
-        Picasso.with(this).load(fullPosterPath).into(moviePosterIv);
-
-        if (title != null) {
-            setTitle(title);
         } else {
-            setTitle(R.string.app_name);
+            Movies currentMovie = intent.getParcelableExtra(CURRENT_MOVIE);
+
+            mOriginalTitleTv.setText(currentMovie.original_title);
+            mPlotSynopsisTv.setText(currentMovie.plot_synopsis);
+            mUserRatingTv.setText(currentMovie.user_rating);
+            mReleaseDateTv.setText(currentMovie.release_date);
+
+            String fullPosterPath = MovieUrlConstants.BASE_POSTER_URL + MovieUrlConstants.DEFAULT_POSTER_SIZE + currentMovie.poster_path;
+            Picasso.with(this).load(fullPosterPath).into(moviePosterIv);
+
+            String fullBackdropPath = MovieUrlConstants.BASE_POSTER_URL + MovieUrlConstants.DEFAULT_BACKDROP_SIZE + currentMovie.backdrop_path;
+            Picasso.with(this).load(fullBackdropPath).into(movieBackdropIv);
+
+            if (currentMovie.title != null) {
+                setTitle(currentMovie.title);
+            } else {
+                setTitle(R.string.app_name);
+            }
         }
     }
 
@@ -64,7 +62,5 @@ public class DetailActivity extends AppCompatActivity {
         finish();
         Toast.makeText(this, R.string.close_on_error, Toast.LENGTH_SHORT).show();
     }
-
-
 }
 

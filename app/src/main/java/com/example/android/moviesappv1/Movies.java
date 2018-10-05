@@ -11,8 +11,9 @@ public class Movies implements Parcelable {
     final String user_rating;
     final String release_date;
     private final String id;
+    final String backdrop_path;
 
-    public Movies(String mTitle, String mOriginalTitle, String imagePath, String plot, String ratings, String mReleaseDate, String movieId)
+    public Movies(String mTitle, String mOriginalTitle, String imagePath, String plot, String ratings, String mReleaseDate, String movieId, String backdrop_path)
     {
         this.title = mTitle;
         this.original_title = mOriginalTitle;
@@ -21,6 +22,7 @@ public class Movies implements Parcelable {
         this.user_rating = ratings;
         this.release_date = mReleaseDate;
         this.id = movieId;
+        this.backdrop_path = backdrop_path;
     }
 
     private Movies(Parcel in){
@@ -31,6 +33,7 @@ public class Movies implements Parcelable {
         user_rating = in.readString();
         release_date = in.readString();
         id = in.readString();
+        backdrop_path = in.readString();
     }
 
     @Override
@@ -38,7 +41,7 @@ public class Movies implements Parcelable {
         return 0;
     }
 
-    public String toString() { return "Title: " + title + "\nOriginal Title: " + original_title + "\nPoster Path: " + poster_path + "\nPlot Synopsis: " + plot_synopsis + "\nUser Rating: " + user_rating + "\nRelease Date: " + release_date + "\nMovie ID: " + id; }
+    public String toString() { return "Title: " + title + "\nOriginal Title: " + original_title + "\nPoster Path: " + poster_path + "\nPlot Synopsis: " + plot_synopsis + "\nUser Rating: " + user_rating + "\nRelease Date: " + release_date + "\nMovie ID: " + id + "\nPoster Path: " + poster_path; }
 
     @Override
     public void writeToParcel(Parcel parcel, int i) {
@@ -49,9 +52,10 @@ public class Movies implements Parcelable {
         parcel.writeString(user_rating);
         parcel.writeString(release_date);
         parcel.writeString(id);
+        parcel.writeString(backdrop_path);
     }
 
-    public final Parcelable.Creator<Movies> CREATOR = new Parcelable.Creator<Movies>() {
+    public static final Parcelable.Creator<Movies> CREATOR = new Parcelable.Creator<Movies>() {
         @Override
         public Movies createFromParcel(Parcel parcel) {
             return new Movies(parcel);

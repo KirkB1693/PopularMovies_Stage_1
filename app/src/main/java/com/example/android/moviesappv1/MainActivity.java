@@ -104,14 +104,9 @@ public class MainActivity extends AppCompatActivity implements MovieRecyclerView
 
     }
 
-    private void launchDetailActivity(String title, String originalTitle, String posterPath, String overview, String userRating, String releaseDate) {
+    private void launchDetailActivity(Movies currentMovie) {
         Intent intent = new Intent(this, DetailActivity.class);
-        intent.putExtra(DetailActivity.TITLE, title);
-        intent.putExtra(DetailActivity.ORIGINAL_TITLE, originalTitle);
-        intent.putExtra(DetailActivity.POSTER_PATH, posterPath);
-        intent.putExtra(DetailActivity.OVERVIEW, overview);
-        intent.putExtra(DetailActivity.USER_RATING, userRating);
-        intent.putExtra(DetailActivity.RELEASE_DATE, releaseDate);
+        intent.putExtra(DetailActivity.CURRENT_MOVIE, currentMovie);
         startActivity(intent);
     }
 
@@ -142,7 +137,7 @@ public class MainActivity extends AppCompatActivity implements MovieRecyclerView
         // Set empty state text to display "No movies found."
         if (movies == null || movies.isEmpty()) {
             showEmptyState();
-            mEmptyStateTextView.setText("Something went wrong...\n\nNo movies found!");
+            mEmptyStateTextView.setText(R.string.error_no_movies_found);
         }
         Log.i(LOG_TAG, "TEST: onLoadFinished() executed");
 
@@ -204,7 +199,7 @@ public class MainActivity extends AppCompatActivity implements MovieRecyclerView
     public void onItemClick(int position) {
         Movies currentMovie = mRecyclerAdapter.getItem(position);
         if (currentMovie != null) {
-            launchDetailActivity(currentMovie.title, currentMovie.original_title, currentMovie.poster_path, currentMovie.plot_synopsis, currentMovie.user_rating, currentMovie.release_date);
+            launchDetailActivity(currentMovie);
         }
     }
 

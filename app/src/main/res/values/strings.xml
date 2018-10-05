@@ -9,4 +9,5 @@
     <string name="action_highest_rated">Highest Rated</string>
     <string name="no_internet">No internet connection</string>
     <string name="close_on_error">Something went wrong…</string>
+    <string name="error_no_movies_found">Something went wrong...  No movies found!</string>
 </resources>
